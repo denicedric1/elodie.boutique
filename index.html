@@ -1,0 +1,3390 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Elodie Boutique - Boutique en ligne</title>
+
+
+    <style>
+
+        /* =====================================================
+           RÉGLAGES GÉNÉRAUX
+        ===================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        button,
+        input,
+        select,
+        textarea {
+            font-family: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =====================================================
+           BARRE PROMOTIONNELLE
+        ===================================================== */
+
+        .top-bar {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 11px;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .header-main {
+            min-height: 75px;
+            padding: 15px 5%;
+
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+            color: #d63384;
+            white-space: nowrap;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 50px 14px 18px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+
+            width: 40px;
+            height: 40px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #d63384;
+            color: white;
+            font-size: 18px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .header-button {
+            border: none;
+            background: transparent;
+            font-size: 14px;
+            font-weight: bold;
+            padding: 8px;
+        }
+
+        .cart-button {
+            position: relative;
+            font-size: 23px;
+        }
+
+        .cart-count {
+            position: absolute;
+
+            top: -3px;
+            right: -4px;
+
+            background: #d63384;
+            color: white;
+
+            width: 20px;
+            height: 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+            font-size: 11px;
+        }
+
+
+        /* =====================================================
+           MENU
+        ===================================================== */
+
+        .menu {
+            border-top: 1px solid #eee;
+            padding: 12px 5%;
+        }
+
+        .menu ul {
+            list-style: none;
+
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .menu a {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .menu a:hover {
+            color: #d63384;
+        }
+
+
+        /* =====================================================
+           HERO
+        ===================================================== */
+
+        .hero {
+            min-height: 530px;
+
+            background:
+                linear-gradient(
+                    rgba(0,0,0,0.45),
+                    rgba(0,0,0,0.45)
+                ),
+                url("https://images.unsplash.com/photo-1483985988355-763728e1935b")
+                center / cover;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            max-width: 750px;
+        }
+
+        .hero h1 {
+            font-size: 58px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 21px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 14px 28px;
+
+            border: none;
+            border-radius: 30px;
+
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .button-primary {
+            background: #d63384;
+            color: white;
+        }
+
+        .button-primary:hover {
+            background: #b52b6e;
+        }
+
+        .button-dark {
+            background: #111;
+            color: white;
+        }
+
+
+        /* =====================================================
+           SECTION
+        ===================================================== */
+
+        .section {
+            padding: 70px 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #777;
+            margin-bottom: 40px;
+        }
+
+
+        /* =====================================================
+           CATÉGORIES
+        ===================================================== */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 18px;
+        }
+
+        .category {
+            background: white;
+            padding: 30px 15px;
+
+            text-align: center;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+
+            transition: 0.3s;
+        }
+
+        .category:hover {
+            transform: translateY(-6px);
+        }
+
+        .category-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .category h3 {
+            margin-bottom: 8px;
+        }
+
+        .category p {
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           BARRE PRODUITS
+        ===================================================== */
+
+        .products-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-button {
+            border: 1px solid #ddd;
+            background: white;
+
+            padding: 10px 16px;
+
+            border-radius: 25px;
+        }
+
+        .filter-button:hover,
+        .filter-button.active {
+            background: #d63384;
+            color: white;
+            border-color: #d63384;
+        }
+
+
+        /* =====================================================
+           PRODUITS
+        ===================================================== */
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .product {
+            background: white;
+
+            border-radius: 15px;
+
+            overflow: hidden;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+
+            transition: 0.3s;
+
+            position: relative;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 270px;
+
+            background: #eee;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 80px;
+
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+
+            top: 12px;
+            left: 12px;
+
+            background: #d63384;
+            color: white;
+
+            padding: 6px 10px;
+
+            border-radius: 5px;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .favorite {
+            position: absolute;
+
+            top: 10px;
+            right: 10px;
+
+            width: 38px;
+            height: 38px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: white;
+
+            font-size: 20px;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-category {
+            color: #999;
+            font-size: 12px;
+            margin-bottom: 7px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .rating {
+            color: #f2a900;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .product-price {
+            color: #d63384;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-left: 8px;
+        }
+
+        .product-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .add-cart {
+            flex: 1;
+
+            border: none;
+
+            background: #111;
+            color: white;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+        }
+
+        .add-cart:hover {
+            background: #d63384;
+        }
+
+
+        /* =====================================================
+           PROMOTION
+        ===================================================== */
+
+        .promotion {
+            background: #d63384;
+            color: white;
+
+            text-align: center;
+
+            padding: 65px 20px;
+        }
+
+        .promotion h2 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .promotion p {
+            font-size: 19px;
+            margin-bottom: 25px;
+        }
+
+
+        /* =====================================================
+           SERVICES
+        ===================================================== */
+
+        .services {
+            background: white;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 25px;
+
+            padding: 45px 5%;
+        }
+
+        .service {
+            text-align: center;
+        }
+
+        .service-icon {
+            font-size: 35px;
+            margin-bottom: 12px;
+        }
+
+        .service h3 {
+            margin-bottom: 7px;
+        }
+
+        .service p {
+            color: #777;
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           NEWSLETTER
+        ===================================================== */
+
+        .newsletter {
+            background: #fff;
+            text-align: center;
+            padding: 70px 20px;
+        }
+
+        .newsletter h2 {
+            margin-bottom: 12px;
+        }
+
+        .newsletter p {
+            color: #777;
+            margin-bottom: 25px;
+        }
+
+        .newsletter-form {
+            max-width: 550px;
+            margin: auto;
+
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+
+            padding: 14px 18px;
+
+            border: 1px solid #ccc;
+            border-radius: 30px;
+
+            outline: none;
+        }
+
+
+        /* =====================================================
+           CONTACT
+        ===================================================== */
+
+        .contact-box {
+            max-width: 800px;
+            margin: auto;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+
+            text-align: center;
+        }
+
+        .contact-item {
+            margin: 15px 0;
+            font-size: 16px;
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+            background: #111;
+            color: white;
+            padding: 55px 5% 25px;
+        }
+
+        .footer-grid {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 35px;
+        }
+
+        footer h3 {
+            color: #d63384;
+            margin-bottom: 18px;
+        }
+
+        footer p {
+            color: #ccc;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        footer a {
+            color: #ccc;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .copyright {
+            border-top: 1px solid #333;
+
+            margin-top: 40px;
+            padding-top: 20px;
+
+            text-align: center;
+
+            color: #888;
+        }
+
+
+        /* =====================================================
+           PANIER
+        ===================================================== */
+
+        .overlay {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.5);
+
+            z-index: 1900;
+
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .cart {
+            position: fixed;
+
+            top: 0;
+            right: -450px;
+
+            width: 430px;
+            max-width: 95%;
+
+            height: 100vh;
+
+            background: white;
+
+            z-index: 2000;
+
+            padding: 25px;
+
+            box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+
+            transition: 0.4s;
+
+            overflow-y: auto;
+        }
+
+        .cart.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            border-bottom: 1px solid #ddd;
+
+            padding-bottom: 20px;
+
+            margin-bottom: 20px;
+        }
+
+        .close-button {
+            border: none;
+            background: transparent;
+
+            font-size: 28px;
+        }
+
+        .cart-item {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            gap: 10px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #d63384;
+            font-weight: bold;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .quantity-controls button {
+            width: 28px;
+            height: 28px;
+
+            border: 1px solid #ddd;
+            background: white;
+
+            border-radius: 5px;
+        }
+
+        .remove-item {
+            border: none;
+            background: transparent;
+            color: #d00;
+        }
+
+        .cart-summary {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+
+        .summary-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .summary-total {
+            font-size: 21px;
+            font-weight: bold;
+        }
+
+        .checkout-button {
+            width: 100%;
+
+            border: none;
+
+            background: #d63384;
+            color: white;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            font-weight: bold;
+
+            margin-top: 15px;
+        }
+
+
+        /* =====================================================
+           MODAL COMMANDE
+        ===================================================== */
+
+        .modal {
+            position: fixed;
+
+            inset: 0;
+
+            background: rgba(0,0,0,0.6);
+
+            z-index: 3000;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+
+            width: 650px;
+            max-width: 100%;
+
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 15px;
+
+            padding: 30px;
+
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+
+            top: 15px;
+            right: 18px;
+
+            border: none;
+            background: transparent;
+
+            font-size: 28px;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .delivery-info {
+            background: #f8f8f8;
+
+            padding: 15px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            font-size: 14px;
+        }
+
+        .order-total {
+            font-size: 21px;
+            font-weight: bold;
+
+            margin: 20px 0;
+        }
+
+
+        /* =====================================================
+           CONDITIONS
+        ===================================================== */
+
+        .terms-content {
+            max-width: 900px;
+            margin: auto;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            line-height: 1.7;
+        }
+
+        .terms-content h3 {
+            margin-top: 25px;
+            margin-bottom: 8px;
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .categories {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 900px) {
+
+            .header-main {
+                flex-wrap: wrap;
+            }
+
+            .search-box {
+                order: 3;
+                flex-basis: 100%;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 650px) {
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .header-actions {
+                margin-left: auto;
+            }
+
+            .menu ul {
+                gap: 15px;
+            }
+
+            .hero {
+                min-height: 450px;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .categories,
+            .products,
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form button {
+                width: 100%;
+            }
+
+            .cart {
+                width: 100%;
+                max-width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     BARRE DU HAUT
+===================================================== -->
+
+<div class="top-bar">
+
+    🎁 Bienvenue chez Elodie Boutique —
+    Livraison à partir de 1 500 F CFA
+
+</div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <div class="header-main">
+
+
+        <div class="logo">
+
+            Elodie Boutique
+
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Rechercher un produit..."
+                onkeyup="rechercherProduit()">
+
+            <button>
+
+                🔍
+
+            </button>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <button
+                class="header-button"
+                onclick="afficherFavoris()">
+
+                ♡ Favoris
+
+            </button>
+
+
+            <button
+                class="header-button cart-button"
+                onclick="ouvrirPanier()">
+
+                🛒
+
+                <span
+                    class="cart-count"
+                    id="cartCount">
+
+                    0
+
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- MENU -->
+
+    <nav class="menu">
+
+        <ul>
+
+            <li>
+                <a href="#accueil">
+                    Accueil
+                </a>
+            </li>
+
+            <li>
+                <a href="#categories">
+                    Catégories
+                </a>
+            </li>
+
+            <li>
+                <a href="#produits">
+                    Produits
+                </a>
+            </li>
+
+            <li>
+                <a href="#promotions">
+                    Promotions
+                </a>
+            </li>
+
+            <li>
+                <a href="#contact">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section
+    class="hero"
+    id="accueil">
+
+
+    <div class="hero-content">
+
+
+        <h1>
+
+            Elodie Boutique
+
+        </h1>
+
+
+        <p>
+
+            Découvrez notre sélection de
+            parfums, chaussures, sacs,
+            accessoires décoratifs et
+            box cadeaux.
+
+        </p>
+
+
+        <a
+            href="#produits"
+            class="button button-primary">
+
+            Découvrir nos produits
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATÉGORIES
+===================================================== -->
+
+<section
+    class="section"
+    id="categories">
+
+
+    <h2 class="section-title">
+
+        Nos catégories
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        Trouvez facilement ce que vous recherchez.
+
+    </p>
+
+
+    <div class="categories">
+
+
+        <div
+            class="category"
+            onclick="filtrerCategorie('Parfums')">
+
+            <div class="category-icon">
+
+                🌸
+
+            </div>
+
+            <h3>
+                Parfums
+            </h3>
+
+            <p>
+                Des parfums pour toutes
+                les occasions.
+            </p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="filtrerCategorie('Chaussures')">
+
+            <div class="category-icon">
+
+                👠
+
+            </div>
+
+            <h3>
+                Chaussures
+            </h3>
+
+            <p>
+                Élégance et confort.
+            </p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="filtrerCategorie('Sacs')">
+
+            <div class="category-icon">
+
+                👜
+
+            </div>
+
+            <h3>
+                Sacs
+            </h3>
+
+            <p>
+                Des sacs élégants
+                pour votre style.
+            </p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="filtrerCategorie('Accessoires décoratifs')">
+
+            <div class="category-icon">
+
+                🏠
+
+            </div>
+
+            <h3>
+                Accessoires décoratifs
+            </h3>
+
+            <p>
+                Pour embellir votre intérieur.
+            </p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="filtrerCategorie('Box cadeaux')">
+
+            <div class="category-icon">
+
+                🎁
+
+            </div>
+
+            <h3>
+                Box cadeaux
+            </h3>
+
+            <p>
+                Des cadeaux préparés
+                avec soin.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUITS
+===================================================== -->
+
+<section
+    class="section"
+    id="produits">
+
+
+    <h2 class="section-title">
+
+        Nos produits
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        Découvrez nos produits disponibles.
+
+    </p>
+
+
+    <div class="products-toolbar">
+
+
+        <div class="filter-buttons">
+
+
+            <button
+                class="filter-button active"
+                onclick="filtrerCategorie('Tous')">
+
+                Tous
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                onclick="filtrerCategorie('Parfums')">
+
+                Parfums
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                onclick="filtrerCategorie('Chaussures')">
+
+                Chaussures
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                onclick="filtrerCategorie('Sacs')">
+
+                Sacs
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                onclick="filtrerCategorie('Accessoires décoratifs')">
+
+                Décoration
+
+            </button>
+
+
+            <button
+                class="filter-button"
+                onclick="filtrerCategorie('Box cadeaux')">
+
+                Box cadeaux
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="products"
+        id="productsContainer">
+
+
+        <!-- PRODUIT 1 -->
+
+        <div
+            class="product"
+            data-category="Parfums"
+            data-name="Parfum Élégance">
+
+
+            <div class="product-image">
+
+                <span class="badge">
+                    Nouveau
+                </span>
+
+                🌸
+
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Parfum Élégance')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Parfums
+                </div>
+
+                <div class="product-name">
+                    Parfum Élégance
+                </div>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="product-price">
+                    15 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Parfum Élégance',
+                        15000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUIT 2 -->
+
+        <div
+            class="product"
+            data-category="Parfums"
+            data-name="Parfum Douceur">
+
+
+            <div class="product-image">
+
+                💐
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Parfum Douceur')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Parfums
+                </div>
+
+                <div class="product-name">
+                    Parfum Douceur
+                </div>
+
+                <div class="rating">
+                    ★★★★☆
+                </div>
+
+                <div class="product-price">
+                    18 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Parfum Douceur',
+                        18000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUIT 3 -->
+
+        <div
+            class="product"
+            data-category="Chaussures"
+            data-name="Chaussures Élégantes">
+
+
+            <div class="product-image">
+
+                👠
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Chaussures Élégantes')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Chaussures
+                </div>
+
+                <div class="product-name">
+                    Chaussures Élégantes
+                </div>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="product-price">
+                    25 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Chaussures Élégantes',
+                        25000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUIT 4 -->
+
+        <div
+            class="product"
+            data-category="Chaussures"
+            data-name="Sandales Femme">
+
+
+            <div class="product-image">
+
+                👡
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Sandales Femme')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Chaussures
+                </div>
+
+                <div class="product-name">
+                    Sandales Femme
+                </div>
+
+                <div class="rating">
+                    ★★★★☆
+                </div>
+
+                <div class="product-price">
+                    18 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Sandales Femme',
+                        18000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUIT 5 -->
+
+        <div
+            class="product"
+            data-category="Sacs"
+            data-name="Sac à main">
+
+
+            <div class="product-image">
+
+                👜
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Sac à main')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Sacs
+                </div>
+
+                <div class="product-name">
+                    Sac à main
+                </div>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="product-price">
+                    22 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Sac à main',
+                        22000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUIT 6 -->
+
+        <div
+            class="product"
+            data-category="Sacs"
+            data-name="Sac élégant">
+
+
+            <div class="product-image">
+
+                👝
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Sac élégant')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Sacs
+                </div>
+
+                <div class="product-name">
+                    Sac élégant
+                </div>
+
+                <div class="rating">
+                    ★★★★☆
+                </div>
+
+                <div class="product-price">
+                    20 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Sac élégant',
+                        20000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUIT 7 -->
+
+        <div
+            class="product"
+            data-category="Accessoires décoratifs"
+            data-name="Décoration maison">
+
+
+            <div class="product-image">
+
+                🏠
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Décoration maison')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Accessoires décoratifs
+                </div>
+
+                <div class="product-name">
+                    Décoration maison
+                </div>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="product-price">
+                    12 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Décoration maison',
+                        12000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUIT 8 -->
+
+        <div
+            class="product"
+            data-category="Box cadeaux"
+            data-name="Box Cadeau Élégance">
+
+
+            <div class="product-image">
+
+                <span class="badge">
+                    Populaire
+                </span>
+
+                🎁
+
+                <button
+                    class="favorite"
+                    onclick="ajouterFavori('Box Cadeau Élégance')">
+
+                    ♡
+
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    Box cadeaux
+                </div>
+
+                <div class="product-name">
+                    Box Cadeau Élégance
+                </div>
+
+                <div class="rating">
+                    ★★★★★
+                </div>
+
+                <div class="product-price">
+                    30 000 F CFA
+                </div>
+
+                <button
+                    class="add-cart"
+                    onclick="ajouterAuPanier(
+                        'Box Cadeau Élégance',
+                        30000
+                    )">
+
+                    Ajouter au panier
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PROMOTION
+===================================================== -->
+
+<section
+    class="promotion"
+    id="promotions">
+
+
+    <h2>
+
+        🎉 Offre spéciale
+
+    </h2>
+
+
+    <p>
+
+        Profitez de nos promotions
+        et découvrez nos produits.
+
+    </p>
+
+
+    <a
+        href="#produits"
+        class="button button-dark">
+
+        Acheter maintenant
+
+    </a>
+
+</section>
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="services">
+
+
+    <div class="service">
+
+        <div class="service-icon">
+            🚚
+        </div>
+
+        <h3>
+            Livraison
+        </h3>
+
+        <p>
+            Livraison à partir de
+            1 500 F CFA.
+        </p>
+
+    </div>
+
+
+    <div class="service">
+
+        <div class="service-icon">
+            📦
+        </div>
+
+        <h3>
+            Vérification
+        </h3>
+
+        <p>
+            Vérifiez votre colis
+            à la livraison.
+        </p>
+
+    </div>
+
+
+    <div class="service">
+
+        <div class="service-icon">
+            🔒
+        </div>
+
+        <h3>
+            Commande simple
+        </h3>
+
+        <p>
+            Commandez facilement
+            depuis notre boutique.
+        </p>
+
+    </div>
+
+
+    <div class="service">
+
+        <div class="service-icon">
+            📞
+        </div>
+
+        <h3>
+            Assistance
+        </h3>
+
+        <p>
+            Contactez-nous pour
+            toute question.
+        </p>
+
+    </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     NEWSLETTER
+===================================================== -->
+
+<section class="newsletter">
+
+
+    <h2>
+        Recevez nos nouveautés
+    </h2>
+
+
+    <p>
+        Inscrivez-vous pour recevoir
+        nos offres et nouveautés.
+    </p>
+
+
+    <form
+        class="newsletter-form"
+        onsubmit="inscriptionNewsletter(event)">
+
+
+        <input
+            type="email"
+            id="newsletterEmail"
+            placeholder="Votre adresse email"
+            required>
+
+
+        <button
+            type="submit"
+            class="button button-primary">
+
+            S'inscrire
+
+        </button>
+
+
+    </form>
+
+</section>
+
+
+<!-- =====================================================
+     CONTACT
+===================================================== -->
+
+<section
+    class="section"
+    id="contact">
+
+
+    <h2 class="section-title">
+
+        Contactez-nous
+
+    </h2>
+
+
+    <p class="section-subtitle">
+
+        Nous sommes à votre disposition.
+
+    </p>
+
+
+    <div class="contact-box">
+
+
+        <div class="contact-item">
+
+            📞
+
+            <strong>
+                Téléphone :
+            </strong>
+
+            +225 07 89 93 10 51
+
+        </div>
+
+
+        <div class="contact-item">
+
+            📧
+
+            <strong>
+                Email :
+            </strong>
+
+            djaveroniqueelodie@icloud.com
+
+        </div>
+
+
+        <div class="contact-item">
+
+            📍
+
+            <strong>
+                Localisation :
+            </strong>
+
+            Abidjan, Côte d'Ivoire
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CONDITIONS GÉNÉRALES
+===================================================== -->
+
+<section class="section">
+
+
+    <h2 class="section-title">
+
+        Conditions générales
+
+    </h2>
+
+
+    <div class="terms-content">
+
+
+        <h3>
+            1. Commandes
+        </h3>
+
+        <p>
+
+            Le client doit fournir des informations
+            exactes lors de sa commande, notamment
+            son nom, son numéro de téléphone et son
+            adresse de livraison.
+
+        </p>
+
+
+        <h3>
+            2. Livraison
+        </h3>
+
+        <p>
+
+            Les frais de livraison sont de
+            <strong>1 500 F CFA</strong> pour les zones
+            standards et de
+            <strong>2 000 F CFA</strong> pour les zones
+            éloignées.
+
+        </p>
+
+
+        <h3>
+            3. Vérification du colis
+        </h3>
+
+        <p>
+
+            Le client doit vérifier son colis au moment
+            de la livraison avant d'accepter la réception.
+
+            Toute anomalie visible doit être signalée
+            immédiatement.
+
+        </p>
+
+
+        <h3>
+            4. Retours
+        </h3>
+
+        <p>
+
+            Le client est invité à vérifier le colis
+            au moment de la livraison.
+
+            Les conditions de retour peuvent dépendre
+            de la nature du produit et des circonstances
+            de la commande.
+
+        </p>
+
+
+        <h3>
+            5. Prix
+        </h3>
+
+        <p>
+
+            Les prix affichés sur le site sont indiqués
+            en F CFA. Les frais de livraison sont ajoutés
+            séparément au montant de la commande.
+
+        </p>
+
+
+        <h3>
+            6. Contact
+        </h3>
+
+        <p>
+
+            Pour toute question concernant une commande,
+            contactez Elodie Boutique au
+            <strong>+225 07 89 93 10 51</strong> ou à
+            <strong>djaveroniqueelodie@icloud.com</strong>.
+
+        </p>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+    <div class="footer-grid">
+
+
+        <div>
+
+            <h3>
+                Elodie Boutique
+            </h3>
+
+            <p>
+
+                Votre boutique en ligne de
+                parfums, chaussures, sacs,
+                accessoires décoratifs et
+                box cadeaux.
+
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Boutique
+            </h3>
+
+            <p>
+                <a href="#produits">
+                    Parfums
+                </a>
+            </p>
+
+            <p>
+                <a href="#produits">
+                    Chaussures
+                </a>
+            </p>
+
+            <p>
+                <a href="#produits">
+                    Sacs
+                </a>
+            </p>
+
+            <p>
+                <a href="#produits">
+                    Accessoires décoratifs
+                </a>
+            </p>
+
+            <p>
+                <a href="#produits">
+                    Box cadeaux
+                </a>
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Informations
+            </h3>
+
+            <p>
+                Livraison :
+                1 500 F CFA
+            </p>
+
+            <p>
+                Zones éloignées :
+                2 000 F CFA
+            </p>
+
+            <p>
+                Vérification du colis
+                à la livraison
+            </p>
+
+            <p>
+                <a href="#contact">
+                    Conditions générales
+                </a>
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Suivez-nous
+            </h3>
+
+            <p>
+                Facebook :
+                Elodie boutique
+            </p>
+
+            <p>
+                Instagram :
+                Elodie boutique
+            </p>
+
+            <p>
+                TikTok :
+                Elodie boutique
+            </p>
+
+            <p>
+                📞 +225 07 89 93 10 51
+            </p>
+
+            <p>
+                📧 djaveroniqueelodie@icloud.com
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="copyright">
+
+        © 2026 Elodie Boutique -
+        Tous droits réservés.
+
+    </div>
+
+
+</footer>
+
+
+<!-- =====================================================
+     FOND DU PANIER
+===================================================== -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="fermerPanier()">
+</div>
+
+
+<!-- =====================================================
+     PANIER
+===================================================== -->
+
+<div
+    class="cart"
+    id="cart">
+
+
+    <div class="cart-header">
+
+        <h2>
+            🛒 Mon panier
+        </h2>
+
+        <button
+            class="close-button"
+            onclick="fermerPanier()">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div id="cartItems">
+
+        <p>
+            Votre panier est vide.
+        </p>
+
+    </div>
+
+
+    <div class="cart-summary">
+
+
+        <div class="summary-line">
+
+            <span>
+                Sous-total
+            </span>
+
+            <strong id="subtotal">
+                0 F CFA
+            </strong>
+
+        </div>
+
+
+        <div class="summary-line">
+
+            <span>
+                Livraison
+            </span>
+
+            <strong id="deliveryPrice">
+                0 F CFA
+            </strong>
+
+        </div>
+
+
+        <div class="summary-line summary-total">
+
+            <span>
+                Total
+            </span>
+
+            <span id="cartTotal">
+                0 F CFA
+            </span>
+
+        </div>
+
+
+        <button
+            class="checkout-button"
+            onclick="ouvrirCommande()">
+
+            Passer la commande
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MODAL COMMANDE
+===================================================== -->
+
+<div
+    class="modal"
+    id="orderModal">
+
+
+    <div class="modal-content">
+
+
+        <button
+            class="modal-close"
+            onclick="fermerCommande()">
+
+            ×
+
+        </button>
+
+
+        <h2>
+            Finaliser ma commande
+        </h2>
+
+
+        <div class="delivery-info">
+
+            🚚 <strong>Livraison :</strong>
+
+            <br><br>
+
+            Zone standard :
+            <strong>1 500 F CFA</strong>
+
+            <br>
+
+            Zone éloignée :
+            <strong>2 000 F CFA</strong>
+
+            <br><br>
+
+            Veuillez vérifier votre colis
+            à la livraison.
+
+        </div>
+
+
+        <form
+            onsubmit="confirmerCommande(event)">
+
+
+            <div class="form-group">
+
+                <label>
+                    Nom complet
+                </label>
+
+                <input
+                    type="text"
+                    id="customerName"
+                    placeholder="Votre nom"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Numéro de téléphone
+                </label>
+
+                <input
+                    type="tel"
+                    id="customerPhone"
+                    placeholder="+225..."
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Zone de livraison
+                </label>
+
+                <select
+                    id="deliveryZone"
+                    onchange="calculerLivraison()"
+                    required>
+
+                    <option value="">
+                        Choisir une zone
+                    </option>
+
+                    <option value="standard">
+                        Zone standard - 1 500 F CFA
+                    </option>
+
+                    <option value="eloignee">
+                        Zone éloignée - 2 000 F CFA
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Adresse de livraison
+                </label>
+
+                <textarea
+                    id="customerAddress"
+                    placeholder="Votre adresse complète"
+                    required></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Mode de paiement
+                </label>
+
+                <select
+                    id="paymentMethod"
+                    required>
+
+                    <option value="">
+                        Choisir un mode de paiement
+                    </option>
+
+                    <option value="livraison">
+                        Paiement à la livraison
+                    </option>
+
+                    <option value="mobile">
+                        Mobile Money
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="order-total">
+
+                Total de la commande :
+
+                <span id="orderTotal">
+                    0 F CFA
+                </span>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="checkout-button">
+
+                Confirmer la commande
+
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let panier = [];
+
+let favoris = [];
+
+let fraisLivraison = 0;
+
+
+/* =====================================================
+   FORMATAGE DU PRIX
+===================================================== */
+
+function formaterPrix(prix) {
+
+    return prix.toLocaleString("fr-FR")
+        + " F CFA";
+
+}
+
+
+/* =====================================================
+   OUVRIR PANIER
+===================================================== */
+
+function ouvrirPanier() {
+
+    document
+        .getElementById("cart")
+        .classList
+        .add("active");
+
+    document
+        .getElementById("overlay")
+        .classList
+        .add("active");
+
+}
+
+
+/* =====================================================
+   FERMER PANIER
+===================================================== */
+
+function fermerPanier() {
+
+    document
+        .getElementById("cart")
+        .classList
+        .remove("active");
+
+    document
+        .getElementById("overlay")
+        .classList
+        .remove("active");
+
+}
+
+
+/* =====================================================
+   AJOUTER AU PANIER
+===================================================== */
+
+function ajouterAuPanier(nom, prix) {
+
+
+    let produitExistant =
+        panier.find(
+            produit => produit.nom === nom
+        );
+
+
+    if (produitExistant) {
+
+        produitExistant.quantite++;
+
+    }
+
+    else {
+
+        panier.push({
+
+            nom: nom,
+            prix: prix,
+            quantite: 1
+
+        });
+
+    }
+
+
+    afficherPanier();
+
+    ouvrirPanier();
+
+}
+
+
+/* =====================================================
+   AFFICHER PANIER
+===================================================== */
+
+function afficherPanier() {
+
+
+    let zone =
+        document.getElementById("cartItems");
+
+
+    zone.innerHTML = "";
+
+
+    if (panier.length === 0) {
+
+        zone.innerHTML =
+            "<p>Votre panier est vide.</p>";
+
+        document
+            .getElementById("subtotal")
+            .textContent =
+            "0 F CFA";
+
+        document
+            .getElementById("deliveryPrice")
+            .textContent =
+            "0 F CFA";
+
+        document
+            .getElementById("cartTotal")
+            .textContent =
+            "0 F CFA";
+
+        document
+            .getElementById("cartCount")
+            .textContent =
+            "0";
+
+        return;
+
+    }
+
+
+    let subtotal = 0;
+
+    let nombreProduits = 0;
+
+
+    panier.forEach(function(produit, index) {
+
+
+        subtotal +=
+            produit.prix *
+            produit.quantite;
+
+
+        nombreProduits +=
+            produit.quantite;
+
+
+        let element =
+            document.createElement("div");
+
+
+        element.className =
+            "cart-item";
+
+
+        element.innerHTML = `
+
+            <div class="cart-item-info">
+
+                <div class="cart-item-name">
+
+                    ${produit.nom}
+
+                </div>
+
+                <div class="cart-item-price">
+
+                    ${formaterPrix(produit.prix)}
+
+                </div>
+
+            </div>
+
+
+            <div class="quantity-controls">
+
+                <button
+                    onclick="modifierQuantite(${index}, -1)">
+
+                    −
+
+                </button>
+
+
+                <strong>
+
+                    ${produit.quantite}
+
+                </strong>
+
+
+                <button
+                    onclick="modifierQuantite(${index}, 1)">
+
+                    +
+
+                </button>
+
+            </div>
+
+
+            <button
+                class="remove-item"
+                onclick="supprimerProduit(${index})">
+
+                🗑️
+
+            </button>
+
+        `;
+
+
+        zone.appendChild(element);
+
+
+    });
+
+
+    let total =
+        subtotal + fraisLivraison;
+
+
+    document
+        .getElementById("subtotal")
+        .textContent =
+        formaterPrix(subtotal);
+
+
+    document
+        .getElementById("deliveryPrice")
+        .textContent =
+        formaterPrix(fraisLivraison);
+
+
+    document
+        .getElementById("cartTotal")
+        .textContent =
+        formaterPrix(total);
+
+
+    document
+        .getElementById("cartCount")
+        .textContent =
+        nombreProduits;
+
+}
+
+
+/* =====================================================
+   MODIFIER QUANTITÉ
+===================================================== */
+
+function modifierQuantite(index, changement) {
+
+
+    panier[index].quantite +=
+        changement;
+
+
+    if (panier[index].quantite <= 0) {
+
+        panier.splice(index, 1);
+
+    }
+
+
+    afficherPanier();
+
+}
+
+
+/* =====================================================
+   SUPPRIMER PRODUIT
+===================================================== */
+
+function supprimerProduit(index) {
+
+    panier.splice(index, 1);
+
+    afficherPanier();
+
+}
+
+
+/* =====================================================
+   FAVORIS
+===================================================== */
+
+function ajouterFavori(nom) {
+
+
+    if (!favoris.includes(nom)) {
+
+        favoris.push(nom);
+
+        alert(
+            nom +
+            " a été ajouté à vos favoris ❤️"
+        );
+
+    }
+
+    else {
+
+        alert(
+            nom +
+            " est déjà dans vos favoris."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   AFFICHER FAVORIS
+===================================================== */
+
+function afficherFavoris() {
+
+
+    if (favoris.length === 0) {
+
+        alert(
+            "Vous n'avez encore aucun produit favori."
+        );
+
+        return;
+
+    }
+
+
+    alert(
+        "Vos favoris :\n\n" +
+        favoris.join("\n")
+    );
+
+}
+
+
+/* =====================================================
+   FILTRER PAR CATÉGORIE
+===================================================== */
+
+function filtrerCategorie(categorie) {
+
+
+    let produits =
+        document.querySelectorAll(".product");
+
+
+    let boutons =
+        document.querySelectorAll(".filter-button");
+
+
+    boutons.forEach(
+        bouton =>
+        bouton.classList.remove("active")
+    );
+
+
+    produits.forEach(function(produit) {
+
+
+        if (
+            categorie === "Tous" ||
+            produit.dataset.category === categorie
+        ) {
+
+            produit.style.display = "block";
+
+        }
+
+        else {
+
+            produit.style.display = "none";
+
+        }
+
+    });
+
+
+    document
+        .getElementById("produits")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+/* =====================================================
+   RECHERCHE
+===================================================== */
+
+function rechercherProduit() {
+
+
+    let recherche =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+
+    let produits =
+        document.querySelectorAll(".product");
+
+
+    produits.forEach(function(produit) {
+
+
+        let nom =
+            produit.dataset.name
+            .toLowerCase();
+
+
+        let categorie =
+            produit.dataset.category
+            .toLowerCase();
+
+
+        if (
+            nom.includes(recherche) ||
+            categorie.includes(recherche)
+        ) {
+
+            produit.style.display =
+                "block";
+
+        }
+
+        else {
+
+            produit.style.display =
+                "none";
+
+        }
+
+    });
+
+}
+
+
+/* =====================================================
+   CALCUL LIVRAISON
+===================================================== */
+
+function calculerLivraison() {
+
+
+    let zone =
+        document
+        .getElementById("deliveryZone")
+        .value;
+
+
+    if (zone === "standard") {
+
+        fraisLivraison = 1500;
+
+    }
+
+    else if (zone === "eloignee") {
+
+        fraisLivraison = 2000;
+
+    }
+
+    else {
+
+        fraisLivraison = 0;
+
+    }
+
+
+    afficherPanier();
+
+
+    let subtotal =
+        panier.reduce(
+            (total, produit) =>
+            total +
+            produit.prix *
+            produit.quantite,
+            0
+        );
+
+
+    document
+        .getElementById("orderTotal")
+        .textContent =
+        formaterPrix(
+            subtotal + fraisLivraison
+        );
+
+}
+
+
+/* =====================================================
+   OUVRIR COMMANDE
+===================================================== */
+
+function ouvrirCommande() {
+
+
+    if (panier.length === 0) {
+
+        alert(
+            "Votre panier est vide."
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById("orderModal")
+        .classList
+        .add("active");
+
+
+    calculerLivraison();
+
+}
+
+
+/* =====================================================
+   FERMER COMMANDE
+===================================================== */
+
+function fermerCommande() {
+
+    document
+        .getElementById("orderModal")
+        .classList
+        .remove("active");
+
+}
+
+
+/* =====================================================
+   CONFIRMER COMMANDE
+===================================================== */
+
+function confirmerCommande(event) {
+
+
+    event.preventDefault();
+
+
+    let nom =
+        document
+        .getElementById("customerName")
+        .value;
+
+
+    let telephone =
+        document
+        .getElementById("customerPhone")
+        .value;
+
+
+    let adresse =
+        document
+        .getElementById("customerAddress")
+        .value;
+
+
+    let zone =
+        document
+        .getElementById("deliveryZone")
+        .value;
+
+
+    let paiement =
+        document
+        .getElementById("paymentMethod")
+        .value;
+
+
+    if (!zone) {
+
+        alert(
+            "Veuillez choisir votre zone de livraison."
+        );
+
+        return;
+
+    }
+
+
+    let total =
+        panier.reduce(
+            (somme, produit) =>
+            somme +
+            produit.prix *
+            produit.quantite,
+            0
+        )
+        + fraisLivraison;
+
+
+    alert(
+
+        "Commande enregistrée !\n\n" +
+
+        "Client : " +
+        nom + "\n" +
+
+        "Téléphone : " +
+        telephone + "\n" +
+
+        "Adresse : " +
+        adresse + "\n\n" +
+
+        "Paiement : " +
+        paiement + "\n\n" +
+
+        "Total : " +
+        formaterPrix(total) +
+
+        "\n\nMerci d'avoir choisi Elodie Boutique !"
+
+    );
+
+
+    panier = [];
+
+    fraisLivraison = 0;
+
+
+    afficherPanier();
+
+    fermerCommande();
+
+    fermerPanier();
+
+}
+
+
+/* =====================================================
+   NEWSLETTER
+===================================================== */
+
+function inscriptionNewsletter(event) {
+
+
+    event.preventDefault();
+
+
+    let email =
+        document
+        .getElementById("newsletterEmail")
+        .value;
+
+
+    alert(
+
+        "Merci !\n\n" +
+
+        email +
+
+        " a été enregistré pour recevoir " +
+        "les nouveautés d'Elodie Boutique."
+
+    );
+
+
+    document
+        .getElementById("newsletterEmail")
+        .value = "";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
+```
