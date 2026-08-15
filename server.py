@@ -201,7 +201,7 @@ creer_comptes()
 @app.route("/")
 def accueil():
 
-    return "Elodie Boutique - Serveur opérationnel !"
+    return render_template("index.html")
 
 
 # =========================================================
