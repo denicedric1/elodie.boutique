@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Passer une commande - Elodie Boutique</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .conteneur {
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .carte {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+        }
+
+        textarea {
+            min-height: 90px;
+            resize: vertical;
+        }
+
+        .produit {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .produit input {
+            width: 80px;
+        }
+
+        .total {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .bouton {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #1565c0;
+            color: white;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .bouton:hover {
+            opacity: 0.9;
+        }
+
+        .message {
+            display: none;
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .succes {
+            display: block;
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .erreur {
+            display: block;
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .numero-commande {
+            font-size: 22px;
+            margin-top: 10px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="conteneur">
+
+
+    <div class="carte">
+
+        <h1>
+            🛍️ Elodie Boutique
+        </h1>
+
+        <p>
+            Remplissez les informations
+            pour passer votre commande.
+        </p>
+
+    </div>
+
+
+    <form id="formulaire-commande">
+
+
+        <div class="carte">
+
+            <h2>
+                🛍️ Votre commande
+            </h2>
+
+
+            <div class="produit">
+
+                <div>
+
+                    <strong>
+                        Sac Coach
+                    </strong>
+
+                    <div>
+                        17 500 FCFA
+                    </div>
+
+                </div>
+
+
+                <input
+                    type="number"
+                    id="quantite-sac"
+                    value="1"
+                    min="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="total">
+
+                Total :
+
+                <span id="total">
+                    17 500
+                </span>
+
+                FCFA
+
+            </div>
+
+        </div>
+
+
+        <div class="carte">
+
+            <h2>
+                👤 Informations client
+            </h2>
+
+
+            <label for="nom">
+                Nom complet
+            </label>
+
+            <input
+                type="text"
+                id="nom"
+                required
+            >
+
+
+            <label for="telephone">
+                Téléphone
+            </label>
+
+            <input
+                type="tel"
+                id="telephone"
+                placeholder="+225 07..."
+                required
+            >
+
+        </div>
+
+
+        <div class="carte">
+
+            <h2>
+                📍 Adresse de livraison
+            </h2>
+
+
+            <label for="ville">
+                Ville
+            </label>
+
+            <input
+                type="text"
+                id="ville"
+                value="Abidjan"
+                required
+            >
+
+
+            <label for="commune">
+                Commune
+            </label>
+
+            <input
+                type="text"
+                id="commune"
+                required
+            >
+
+
+            <label for="quartier">
+                Quartier
+            </label>
+
+            <input
+                type="text"
+                id="quartier"
+                required
+            >
+
+
+            <label for="adresse">
+                Adresse précise
+            </label>
+
+            <textarea
+                id="adresse"
+                placeholder="Exemple : près de..."
+                required
+            ></textarea>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="bouton"
+        >
+
+            🛒 Valider ma commande
+
+        </button>
+
+
+    </form>
+
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+</div>
+
+
+<script>
+
+
+const PRIX_SAC = 17500;
+
+
+const formulaire =
+    document.getElementById(
+        "formulaire-commande"
+    );
+
+
+const quantite =
+    document.getElementById(
+        "quantite-sac"
+    );
+
+
+const total =
+    document.getElementById(
+        "total"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+quantite.addEventListener(
+    "input",
+    function() {
+
+        let nombre =
+            parseInt(
+                quantite.value
+            );
+
+
+        if (
+            isNaN(nombre)
+            ||
+            nombre < 1
+        ) {
+
+            nombre = 1;
+
+        }
+
+
+        total.textContent =
+            (
+                nombre * PRIX_SAC
+            ).toLocaleString(
+                "fr-FR"
+            );
+
+    }
+);
+
+
+formulaire.addEventListener(
+    "submit",
+    async function(e) {
+
+        e.preventDefault();
+
+
+        message.className =
+            "message";
+
+
+        message.style.display =
+            "block";
+
+
+        message.textContent =
+            "Création de votre commande...";
+
+
+        const nombre =
+            parseInt(
+                quantite.value
+            );
+
+
+        if (
+            isNaN(nombre)
+            ||
+            nombre < 1
+        ) {
+
+            message.className =
+                "message erreur";
+
+            message.textContent =
+                "Veuillez choisir au moins un produit.";
+
+            return;
+
+        }
+
+
+        const donnees = {
+
+            nom:
+                document
+                .getElementById("nom")
+                .value
+                .trim(),
+
+            telephone:
+                document
+                .getElementById("telephone")
+                .value
+                .trim(),
+
+            ville:
+                document
+                .getElementById("ville")
+                .value
+                .trim(),
+
+            commune:
+                document
+                .getElementById("commune")
+                .value
+                .trim(),
+
+            quartier:
+                document
+                .getElementById("quartier")
+                .value
+                .trim(),
+
+            adresse:
+                document
+                .getElementById("adresse")
+                .value
+                .trim(),
+
+            produits:
+                "Sac Coach x" + nombre,
+
+            total:
+                nombre * PRIX_SAC
+
+        };
+
+
+        try {
+
+
+            const reponse =
+                await fetch(
+                    "/api/creer-commande",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                donnees
+                            )
+
+                    }
+                );
+
+
+            const texte =
+                await reponse.text();
+
+
+            let resultat;
+
+
+            try {
+
+                resultat =
+                    JSON.parse(texte);
+
+            }
+
+            catch (erreur) {
+
+                message.className =
+                    "message erreur";
+
+                message.textContent =
+                    "Le serveur a retourné une réponse inattendue.";
+
+                console.log(
+                    "Réponse du serveur :",
+                    texte
+                );
+
+                return;
+
+            }
+
+
+            if (
+                !reponse.ok
+                ||
+                !resultat.success
+            ) {
+
+                message.className =
+                    "message erreur";
+
+                message.textContent =
+                    resultat.message
+                    ||
+                    "Impossible de créer la commande.";
+
+                return;
+
+            }
+
+
+            message.className =
+                "message succes";
+
+
+            message.innerHTML = `
+
+                ✅ ${resultat.message}
+
+                <div class="numero-commande">
+
+                    Numéro de commande :
+                    <strong>
+                        ${resultat.numero_commande}
+                    </strong>
+
+                </div>
+
+            `;
+
+
+            formulaire.reset();
+
+
+            quantite.value = 1;
+
+
+            total.textContent =
+                "17 500";
+
+
+        }
+
+        catch (erreur) {
+
+            console.log(
+                "Erreur JavaScript :",
+                erreur
+            );
+
+
+            message.className =
+                "message erreur";
+
+
+            message.textContent =
+                "Impossible de contacter le serveur. Vérifiez que server.py est bien lancé.";
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

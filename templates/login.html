@@ -1,1 +1,209 @@
+<!DOCTYPE html>
 
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Connexion - Elodie Boutique</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 80px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #222;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 6px;
+            background-color: #222;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .message {
+            margin-top: 15px;
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Elodie Boutique</h1>
+
+        <h2>Connexion</h2>
+
+        <label for="role">
+            Fonction
+        </label>
+
+        <select id="role">
+
+            <option value="admin">
+                Administrateur
+            </option>
+
+            <option value="assistance">
+                Assistance
+            </option>
+
+            <option value="livreur">
+                Livreur
+            </option>
+
+        </select>
+
+
+        <label for="identifiant">
+            Identifiant
+        </label>
+
+        <input
+            type="text"
+            id="identifiant"
+            placeholder="Votre identifiant"
+        >
+
+
+        <label for="mot_de_passe">
+            Mot de passe
+        </label>
+
+        <input
+            type="password"
+            id="mot_de_passe"
+            placeholder="Votre mot de passe"
+        >
+
+
+        <button onclick="seConnecter()">
+            Se connecter
+        </button>
+
+
+        <div id="message" class="message"></div>
+
+    </div>
+
+
+    <script>
+
+        async function seConnecter() {
+
+            const role =
+                document.getElementById("role").value;
+
+            const identifiant =
+                document.getElementById("identifiant").value;
+
+            const motDePasse =
+                document.getElementById("mot_de_passe").value;
+
+            const message =
+                document.getElementById("message");
+
+
+            if (!identifiant || !motDePasse) {
+
+                message.innerHTML =
+                    "Veuillez remplir tous les champs.";
+
+                return;
+
+            }
+
+
+            const reponse = await fetch(
+                "/connexion",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        role: role,
+
+                        identifiant: identifiant,
+
+                        mot_de_passe: motDePasse
+
+                    })
+                }
+            );
+
+
+            const resultat = await reponse.json();
+
+
+            if (resultat.success) {
+
+                window.location.href =
+                    resultat.redirect;
+
+            } else {
+
+                message.innerHTML =
+                    resultat.message;
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>

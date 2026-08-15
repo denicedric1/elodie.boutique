@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Espace Livreur - Elodie Boutique</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+
+        .entete {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
+        .entete h1 {
+            margin: 0;
+            color: #222;
+        }
+
+
+        .nom-livreur {
+            margin-top: 8px;
+            color: #666;
+        }
+
+
+        .bouton-deconnexion {
+            background-color: #c62828;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+
+        .bouton-deconnexion:hover {
+            opacity: 0.85;
+        }
+
+
+        #liste-commandes {
+            display: grid;
+            gap: 20px;
+        }
+
+
+        .commande {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+
+        .commande h2 {
+            margin-top: 0;
+            color: #222;
+        }
+
+
+        .information {
+            margin: 8px 0;
+        }
+
+
+        .prix {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+
+        .statut {
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+
+        .boutons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+
+        .bouton-statut {
+            border: none;
+            padding: 11px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            background-color: #1565c0;
+            color: white;
+            font-weight: bold;
+        }
+
+
+        .bouton-statut:hover {
+            opacity: 0.85;
+        }
+
+
+        .message-vide {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            color: #666;
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 10px;
+            }
+
+
+            .entete {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+
+            .boutons {
+                flex-direction: column;
+            }
+
+
+            .bouton-statut {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="entete">
+
+        <div>
+
+            <h1>
+                🚚 Espace Livreur
+            </h1>
+
+            <div
+                class="nom-livreur"
+                id="nom-livreur"
+            >
+                Chargement...
+            </div>
+
+        </div>
+
+
+        <button
+            class="bouton-deconnexion"
+            onclick="deconnexion()"
+        >
+            Déconnexion
+        </button>
+
+    </div>
+
+
+    <div id="liste-commandes">
+
+        <div class="message-vide">
+            Chargement des commandes...
+        </div>
+
+    </div>
+
+
+    <script>
+
+
+        async function chargerCommandes() {
+
+            try {
+
+                const reponse =
+                    await fetch("/api/commandes");
+
+
+                if (!reponse.ok) {
+
+                    document.getElementById(
+                        "liste-commandes"
+                    ).innerHTML = `
+                        <div class="message-vide">
+                            Impossible de charger
+                            les commandes.
+                        </div>
+                    `;
+
+                    return;
+                }
+
+
+                const commandes =
+                    await reponse.json();
+
+
+                const liste =
+                    document.getElementById(
+                        "liste-commandes"
+                    );
+
+
+                liste.innerHTML = "";
+
+
+                if (commandes.length === 0) {
+
+                    liste.innerHTML = `
+                        <div class="message-vide">
+
+                            📦
+
+                            <h2>
+                                Aucune commande
+                            </h2>
+
+                            <p>
+                                Aucune commande ne vous
+                                est actuellement attribuée.
+                            </p>
+
+                        </div>
+                    `;
+
+                    return;
+
+                }
+
+
+                commandes.forEach(function(commande) {
+
+                    const bloc =
+                        document.createElement("div");
+
+
+                    bloc.className =
+                        "commande";
+
+
+                    bloc.innerHTML = `
+
+                        <h2>
+                            📦 Commande
+                            ${commande.numero_commande}
+                        </h2>
+
+
+                        <div class="information">
+
+                            <strong>
+                                Client :
+                            </strong>
+
+                            ${commande.nom_client}
+
+                        </div>
+
+
+                        <div class="information">
+
+                            <strong>
+                                Téléphone :
+                            </strong>
+
+                            ${commande.telephone}
+
+                        </div>
+
+
+                        <div class="information">
+
+                            <strong>
+                                Ville :
+                            </strong>
+
+                            ${commande.ville}
+
+                        </div>
+
+
+                        <div class="information">
+
+                            <strong>
+                                Commune :
+                            </strong>
+
+                            ${commande.commune}
+
+                        </div>
+
+
+                        <div class="information">
+
+                            <strong>
+                                Quartier :
+                            </strong>
+
+                            ${commande.quartier}
+
+                        </div>
+
+
+                        <div class="information">
+
+                            <strong>
+                                Adresse :
+                            </strong>
+
+                            ${commande.adresse}
+
+                        </div>
+
+
+                        <div class="information">
+
+                            <strong>
+                                Produit :
+                            </strong>
+
+                            ${commande.produits}
+
+                        </div>
+
+
+                        <div class="prix">
+
+                            ${commande.total}
+                            FCFA
+
+                        </div>
+
+
+                        <div class="statut">
+
+                            Statut actuel :
+                            ${commande.statut}
+
+                        </div>
+
+
+                        <div class="boutons">
+
+
+                            <button
+                                class="bouton-statut"
+                                onclick="
+                                    changerStatut(
+                                        ${commande.id},
+                                        'Colis récupéré'
+                                    )
+                                "
+                            >
+                                📦 Colis récupéré
+                            </button>
+
+
+                            <button
+                                class="bouton-statut"
+                                onclick="
+                                    changerStatut(
+                                        ${commande.id},
+                                        'En route'
+                                    )
+                                "
+                            >
+                                🚚 En route
+                            </button>
+
+
+                            <button
+                                class="bouton-statut"
+                                onclick="
+                                    changerStatut(
+                                        ${commande.id},
+                                        'Livraison en cours'
+                                    )
+                                "
+                            >
+                                🏠 Livraison en cours
+                            </button>
+
+
+                            <button
+                                class="bouton-statut"
+                                onclick="
+                                    changerStatut(
+                                        ${commande.id},
+                                        'Commande livrée'
+                                    )
+                                "
+                            >
+                                ✅ Commande livrée
+                            </button>
+
+
+                        </div>
+
+                    `;
+
+
+                    liste.appendChild(bloc);
+
+                });
+
+
+            } catch (erreur) {
+
+                document.getElementById(
+                    "liste-commandes"
+                ).innerHTML = `
+                    <div class="message-vide">
+                        Une erreur est survenue.
+                    </div>
+                `;
+
+            }
+
+        }
+
+
+        async function changerStatut(
+            commandeId,
+            nouveauStatut
+        ) {
+
+            const confirmation =
+                confirm(
+                    "Voulez-vous vraiment mettre cette commande au statut : "
+                    + nouveauStatut
+                    + " ?"
+                );
+
+
+            if (!confirmation) {
+
+                return;
+
+            }
+
+
+            const reponse =
+                await fetch(
+                    "/livreur/statut/"
+                    + commandeId,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            statut:
+                                nouveauStatut
+                        })
+                    }
+                );
+
+
+            const resultat =
+                await reponse.json();
+
+
+            alert(resultat.message);
+
+
+            chargerCommandes();
+
+        }
+
+
+        function deconnexion() {
+
+            window.location.href =
+                "/deconnexion";
+
+        }
+
+
+        chargerCommandes();
+
+
+        setInterval(
+            chargerCommandes,
+            15000
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>
